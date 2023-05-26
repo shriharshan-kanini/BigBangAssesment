@@ -11,6 +11,8 @@ namespace BigBangAssesment.DB
         public DbSet<User> Users { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
+        public DbSet<Booking> Bookings { get; set; }
+
         public HotelDbContext(DbContextOptions<HotelDbContext> options) : base(options)
         {
 
