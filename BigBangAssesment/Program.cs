@@ -1,4 +1,4 @@
-using BigBangAssesment.Model;
+using BigBangAssesment.DB;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
 
