@@ -9,6 +9,5 @@ namespace BigBangAssesment.Repository
         Employee PostEmployee(Employee employee);
         Employee PutEmployee(int EmployeeId, Employee employee);
         Employee DeleteEmployee(int EmployeeId);
-        //int GetRoomCountByRoomIdAndHotelId(int RoomId, int HotelId);
     }
 }
