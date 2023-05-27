@@ -1,11 +1,9 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using BigBangAssesment.Model;
+using BigBangAssesment.Repository;
 
-namespace BigBangAssesment.Repository
+namespace AssessmentAPI.Repositories
 {
     public class HotelRepository : IHotel
     {
@@ -41,7 +39,6 @@ namespace BigBangAssesment.Repository
                 existingHotel.HotelName = hotel.HotelName;
                 existingHotel.HotelDescription = hotel.HotelDescription;
                 existingHotel.HotelLocation = hotel.HotelLocation;
-
                 _context.SaveChanges();
             }
             return existingHotel;

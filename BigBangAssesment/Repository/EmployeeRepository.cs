@@ -1,9 +1,8 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
+﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace AssessmentAPI.Repositories
+namespace HotelManagement.Repositories
 {
     public class EmployeeRepository : IEmployee
     {
@@ -26,12 +25,13 @@ namespace AssessmentAPI.Repositories
 
         public Employee PostEmployee(Employee employee)
         {
-            var emp = _context.Hotels.Find(employee.Hotel.HotelId);
-            employee.Hotel = emp;
+            var hotel = _context.Hotels.Find(employee.Hotel.HotelId);
+            employee.Hotel = hotel;
             _context.Employees.Add(employee);
             _context.SaveChanges();
             return employee;
         }
+
 
         public Employee PutEmployee(int EmployeeId, Employee employee)
         {
@@ -52,7 +52,5 @@ namespace AssessmentAPI.Repositories
             }
             return employee;
         }
-
-
     }
 }

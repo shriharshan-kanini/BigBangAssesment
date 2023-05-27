@@ -1,5 +1,4 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
+﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 
 namespace HotelManagement.Repositories

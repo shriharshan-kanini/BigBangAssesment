@@ -1,45 +1,63 @@
 ﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BigBang.Controllers
+namespace AssessmentAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {
+        private readonly IBooking _bookingRepository;
 
-        private readonly IBooking b;
-        public BookingController(IBooking b)
+        public BookingController(IBooking bookingRepository)
         {
-            this.b = b;
+            _bookingRepository = bookingRepository;
         }
+
         [HttpGet]
-        public IEnumerable<Booking> Get()
+        public IEnumerable<Booking> GetBookings()
         {
-            return b.GetBooking();
+            return _bookingRepository.GetBooking();
         }
 
         [HttpGet("{BookingId}")]
-        public Booking GetById(int BookingId)
+        public IActionResult GetBookingById(int BookingId)
         {
-            return b.GetBookingById(BookingId);
+            var booking = _bookingRepository.GetBookingById(BookingId);
+            if (booking == null)
+                return NotFound();
+
+            return Ok(booking);
         }
 
         [HttpPost]
-        public Booking PostBooking(Booking booking)
+        public IActionResult PostBooking(Booking booking)
         {
-            return b.PostBooking(booking);
+            var newBooking = _bookingRepository.PostBooking(booking);
+            return CreatedAtAction(nameof(GetBookingById), new { BookingId = newBooking.BookingId }, newBooking);
         }
+
         [HttpPut("{BookingId}")]
-        public Booking PutBooking(int BookingId, Booking booking)
+        public IActionResult PutBooking(int BookingId, Booking booking)
         {
-            return b.PutBooking(BookingId, booking);
+            var updatedBooking = _bookingRepository.PutBooking(BookingId, booking);
+            if (updatedBooking == null)
+                return NotFound();
+
+            return Ok(updatedBooking);
         }
+
         [HttpDelete("{BookingId}")]
-        public Booking DeleteBooking(int BookingId)
+        public IActionResult DeleteBooking(int BookingId)
         {
-            return b.DeleteBooking(BookingId);
+            var deletedBooking = _bookingRepository.DeleteBooking(BookingId);
+            if (deletedBooking == null)
+                return NotFound();
+
+            return Ok(deletedBooking);
         }
     }
 }

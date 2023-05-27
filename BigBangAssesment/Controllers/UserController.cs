@@ -1,5 +1,4 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
+﻿using BigBangAssesment.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

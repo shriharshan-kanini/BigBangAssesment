@@ -1,7 +1,6 @@
-﻿using BigBangAssesment.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BigBangAssesment.DB
+namespace BigBangAssesment.Model
 {
     public class HotelDbContext : DbContext
     {

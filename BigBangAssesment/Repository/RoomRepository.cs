@@ -1,9 +1,8 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BigBangAssesment.Model;
+using BigBangAssesment.Repository;
+using Microsoft.EntityFrameworkCore;
 
-namespace BigBangAssesment.Repository
+namespace HotelManagement.Repositories
 {
     public class RoomRepository : IRoom
     {
@@ -26,22 +25,21 @@ namespace BigBangAssesment.Repository
 
         public Room PostRoom(Room room)
         {
+            var hotel = _context.Hotels.Find(room.Hotel.HotelId);
+            room.Hotel = hotel;
             _context.Rooms.Add(room);
             _context.SaveChanges();
             return room;
         }
 
+
         public Room PutRoom(int RoomId, Room room)
         {
-            var existingRoom = _context.Rooms.Find(RoomId);
-            if (existingRoom != null)
-            {
-                existingRoom.Occupancy = room.Occupancy;
-                existingRoom.Price = room.Price;
-
-                _context.SaveChanges();
-            }
-            return existingRoom;
+            var r = _context.Hotels.Find(room.Hotel.HotelId);
+            room.Hotel = r;
+            _context.Entry(room).State = EntityState.Modified;
+            _context.SaveChanges();
+            return room;
         }
 
         public Room DeleteRoom(int RoomId)

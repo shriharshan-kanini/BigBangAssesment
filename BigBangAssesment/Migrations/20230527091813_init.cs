@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BigBangAssesment.Migrations
 {
-    public partial class assesment : Migration
+    /// <inheritdoc />
+    public partial class init : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -15,9 +17,9 @@ namespace BigBangAssesment.Migrations
                 {
                     HotelId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HotelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HotelLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HotelDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    HotelName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HotelLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HotelDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,7 +86,7 @@ namespace BigBangAssesment.Migrations
                 {
                     RoomId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RoomName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Occupancy = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     HotelId = table.Column<int>(type: "int", nullable: true)
@@ -106,8 +108,8 @@ namespace BigBangAssesment.Migrations
                     BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BookedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckInDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CheckOut = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HotelId = table.Column<int>(type: "int", nullable: true),
                     RoomId = table.Column<int>(type: "int", nullable: true),
                     CustomerId = table.Column<int>(type: "int", nullable: true)

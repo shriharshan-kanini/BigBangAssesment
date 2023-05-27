@@ -8,7 +8,7 @@ namespace BigBangAssesment.Model
         public int CustomerId { get; set; }
         public string? CustomerName { get; set; } = string.Empty;
         public int? CustomerNumber { get; set;}
-
+        public ICollection<Booking>? Bookings { get; set; }
         public Hotel? Hotel { get; set; } 
     }
 }

@@ -1,9 +1,9 @@
-﻿using BigBangAssesment.DB;
-using BigBangAssesment.Model;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BigBangAssesment.Model;
+using BigBangAssesment.Repository;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace BigBangAssesment.Repository
+namespace HotelManagement.Repositories
 {
     public class CustomerRepository : ICustomer
     {
@@ -26,6 +26,8 @@ namespace BigBangAssesment.Repository
 
         public Customer PostCustomer(Customer customer)
         {
+            var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
+            customer.Hotel = hotel;
             _context.Customers.Add(customer);
             _context.SaveChanges();
             return customer;
@@ -33,15 +35,11 @@ namespace BigBangAssesment.Repository
 
         public Customer PutCustomer(int CustomerId, Customer customer)
         {
-            var existingCustomer = _context.Customers.Find(CustomerId);
-            if (existingCustomer != null)
-            {
-                existingCustomer.CustomerName = customer.CustomerName;
-                existingCustomer.CustomerNumber = customer.CustomerNumber;
-
-                _context.SaveChanges();
-            }
-            return existingCustomer;
+            var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
+            customer.Hotel = hotel;
+            _context.Entry(customer).State = EntityState.Modified;
+            _context.SaveChanges();
+            return customer;
         }
 
         public Customer DeleteCustomer(int CustomerId)
@@ -53,6 +51,28 @@ namespace BigBangAssesment.Repository
                 _context.SaveChanges();
             }
             return customer;
+        }
+
+        public IEnumerable<Hotel> FilterHotel(string HotelLocation)
+        {
+            var filteredHotels = _context.Hotels.AsQueryable();
+
+            if (!string.IsNullOrEmpty(HotelLocation))
+            {
+                filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(HotelLocation));
+            }
+
+            return filteredHotels.ToList();
+        }
+
+        public int GetRoomOccupancy(int RoomId, int HotelId)
+        {
+            var count = (from Room in _context.Rooms
+                         join hotel in _context.Hotels on Room.Hotel.HotelId equals hotel.HotelId
+                         where Room.RoomId == RoomId && hotel.HotelId == HotelId
+                         select Room.Occupancy).FirstOrDefault();
+
+            return count;
         }
     }
 }

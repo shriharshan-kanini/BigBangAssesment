@@ -47,5 +47,15 @@ namespace HotelManagement.Controllers
         {
             return _customerRepository.DeleteCustomer(id);
         }
+        [HttpGet("Filter")]
+        public IEnumerable<Hotel> FilterHotel(string HotelLocation)
+        {
+            return _customerRepository.FilterHotel(HotelLocation);
+        }
+        [HttpGet("Occupancy")]
+        public int GetRoomOccupancy(int RoomId, int HotelId)
+        {
+            return _customerRepository.GetRoomOccupancy(RoomId, HotelId);
+        }
     }
 }

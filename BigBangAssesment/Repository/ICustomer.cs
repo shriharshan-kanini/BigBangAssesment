@@ -9,5 +9,7 @@ namespace BigBangAssesment.Repository
         public Customer PostCustomer(Customer customer);
         public Customer PutCustomer(int CustomerId, Customer customer);
         public Customer DeleteCustomer(int CustomerId);
+        public IEnumerable<Hotel> FilterHotel(string HotelLocation);
+        public int GetRoomOccupancy(int RoomId, int HotelId);
     }
 }
