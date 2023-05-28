@@ -14,52 +14,92 @@ namespace HotelManagement.Repositories
 
         public IEnumerable<Booking> GetBooking()
         {
-            return _context.Bookings.ToList();
+            try
+            {
+                return _context.Bookings.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Booking GetBookingById(int BookingId)
         {
-            return _context.Bookings.Find(BookingId);
+            try
+            {
+                return _context.Bookings.Find(BookingId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Booking PostBooking(Booking booking)
         {
-            var b = _context.Hotels.Find(booking.Hotel.HotelId);
-            booking.Hotel = b;
-            var room = _context.Rooms.Find(booking.Room.RoomId);
-            booking.Room = room;
+            try
+            {
+                var b = _context.Hotels.Find(booking.Hotel.HotelId);
+                booking.Hotel = b;
+                var room = _context.Rooms.Find(booking.Room.RoomId);
+                booking.Room = room;
 
-            var customer = _context.Customers.Find(booking.Customer.CustomerId);
-            booking.Customer = customer;
+                var customer = _context.Customers.Find(booking.Customer.CustomerId);
+                booking.Customer = customer;
 
-            _context.Add(booking);
-            _context.SaveChanges();
-            return booking;
+                _context.Add(booking);
+                _context.SaveChanges();
+                return booking;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Booking PutBooking(int BookingId, Booking booking)
         {
-            var existingBooking = _context.Bookings.Find(BookingId);
-            if (existingBooking != null)
+            try
             {
-                existingBooking.CheckInDate = booking.CheckInDate;
-                existingBooking.CheckOut = booking.CheckOut;
-                existingBooking.Room = booking.Room;
+                var existingBooking = _context.Bookings.Find(BookingId);
+                if (existingBooking != null)
+                {
+                    existingBooking.CheckInDate = booking.CheckInDate;
+                    existingBooking.CheckOut = booking.CheckOut;
+                    existingBooking.Room = booking.Room;
 
-                _context.SaveChanges();
+                    _context.SaveChanges();
+                }
+                return existingBooking;
             }
-            return existingBooking;
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Booking DeleteBooking(int BookingId)
         {
-            var booking = _context.Bookings.Find(BookingId);
-            if (booking != null)
+            try
             {
-                _context.Bookings.Remove(booking);
-                _context.SaveChanges();
+                var booking = _context.Bookings.Find(BookingId);
+                if (booking != null)
+                {
+                    _context.Bookings.Remove(booking);
+                    _context.SaveChanges();
+                }
+                return booking;
             }
-            return booking;
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null; 
+            }
         }
     }
 }

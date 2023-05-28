@@ -1,6 +1,7 @@
 ﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace HotelManagement.Repositories
 {
@@ -15,42 +16,81 @@ namespace HotelManagement.Repositories
 
         public IEnumerable<Employee> GetEmployees()
         {
-            return _context.Employees.ToList();
+            try
+            {
+                return _context.Employees.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Employee GetEmployeesById(int EmployeeId)
         {
-            return _context.Employees.Find(EmployeeId);
+            try
+            {
+                return _context.Employees.Find(EmployeeId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Employee PostEmployee(Employee employee)
         {
-            var hotel = _context.Hotels.Find(employee.Hotel.HotelId);
-            employee.Hotel = hotel;
-            _context.Employees.Add(employee);
-            _context.SaveChanges();
-            return employee;
+            try
+            {
+                var hotel = _context.Hotels.Find(employee.Hotel.HotelId);
+                employee.Hotel = hotel;
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
-
 
         public Employee PutEmployee(int EmployeeId, Employee employee)
         {
-            var emp = _context.Hotels.Find(employee.Hotel.HotelId);
-            employee.Hotel = emp;
-            _context.Entry(employee).State = EntityState.Modified;
-            _context.SaveChangesAsync();
-            return employee;
+            try
+            {
+                var emp = _context.Hotels.Find(employee.Hotel.HotelId);
+                employee.Hotel = emp;
+                _context.Entry(employee).State = EntityState.Modified;
+                _context.SaveChangesAsync();
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Employee DeleteEmployee(int EmployeeId)
         {
-            var employee = _context.Employees.Find(EmployeeId);
-            if (employee != null)
+            try
             {
-                _context.Employees.Remove(employee);
-                _context.SaveChanges();
+                var employee = _context.Employees.Find(EmployeeId);
+                if (employee != null)
+                {
+                    _context.Employees.Remove(employee);
+                    _context.SaveChanges();
+                }
+                return employee;
             }
-            return employee;
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
     }
 }

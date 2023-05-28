@@ -2,6 +2,8 @@
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HotelManagement.Repositories
 {
@@ -16,63 +18,119 @@ namespace HotelManagement.Repositories
 
         public IEnumerable<Customer> GetCustomer()
         {
-            return _context.Customers.ToList();
+            try
+            {
+                return _context.Customers.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Customer GetCustomerById(int CustomerId)
         {
-            return _context.Customers.Find(CustomerId);
+            try
+            {
+                return _context.Customers.Find(CustomerId);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Customer PostCustomer(Customer customer)
         {
-            var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
-            customer.Hotel = hotel;
-            _context.Customers.Add(customer);
-            _context.SaveChanges();
-            return customer;
+            try
+            {
+                var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
+                customer.Hotel = hotel;
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Customer PutCustomer(int CustomerId, Customer customer)
         {
-            var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
-            customer.Hotel = hotel;
-            _context.Entry(customer).State = EntityState.Modified;
-            _context.SaveChanges();
-            return customer;
+            try
+            {
+                var hotel = _context.Hotels.Find(customer.Hotel.HotelId);
+                customer.Hotel = hotel;
+                _context.Entry(customer).State = EntityState.Modified;
+                _context.SaveChanges();
+                return customer;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public Customer DeleteCustomer(int CustomerId)
         {
-            var customer = _context.Customers.Find(CustomerId);
-            if (customer != null)
+            try
             {
-                _context.Customers.Remove(customer);
-                _context.SaveChanges();
+                var customer = _context.Customers.Find(CustomerId);
+                if (customer != null)
+                {
+                    _context.Customers.Remove(customer);
+                    _context.SaveChanges();
+                }
+                return customer;
             }
-            return customer;
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public IEnumerable<Hotel> FilterHotel(string HotelLocation)
         {
-            var filteredHotels = _context.Hotels.AsQueryable();
-
-            if (!string.IsNullOrEmpty(HotelLocation))
+            try
             {
-                filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(HotelLocation));
-            }
+                var filteredHotels = _context.Hotels.AsQueryable();
 
-            return filteredHotels.ToList();
+                if (!string.IsNullOrEmpty(HotelLocation))
+                {
+                    filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(HotelLocation));
+                }
+
+                return filteredHotels.ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return null;
+            }
         }
 
         public int GetRoomOccupancy(int RoomId, int HotelId)
         {
-            var count = (from Room in _context.Rooms
-                         join hotel in _context.Hotels on Room.Hotel.HotelId equals hotel.HotelId
-                         where Room.RoomId == RoomId && hotel.HotelId == HotelId
-                         select Room.Occupancy).FirstOrDefault();
+            try
+            {
+                var count = (from Room in _context.Rooms
+                             join hotel in _context.Hotels on Room.Hotel.HotelId equals hotel.HotelId
+                             where Room.RoomId == RoomId && hotel.HotelId == HotelId
+                             select Room.Occupancy).FirstOrDefault();
 
-            return count;
+                return count;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return 0;
+            }
         }
     }
 }
