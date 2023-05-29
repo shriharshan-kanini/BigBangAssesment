@@ -1,7 +1,6 @@
 ﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace HotelManagement.Repositories
 {
@@ -22,8 +21,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -35,8 +33,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -52,8 +49,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -69,8 +65,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -88,8 +83,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
     }

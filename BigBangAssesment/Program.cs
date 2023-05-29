@@ -6,6 +6,7 @@ using HotelManagement.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +28,6 @@ builder.Services.AddScoped<IRoom, RoomRepository>();
 builder.Services.AddScoped<IEmployee, EmployeeRepository>();
 builder.Services.AddScoped<ICustomer, CustomerRepository>();
 builder.Services.AddScoped<IBooking, BookingRepository>();
-
-//
 
 // Adding Authentication
 builder.Services.AddAuthentication(options =>
@@ -52,6 +51,17 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
     };
 });
+
+
+builder.Host.UseSerilog((context, config) =>
+{
+    config.WriteTo.File("Log/logging.txt", rollingInterval: RollingInterval.Day);
+    if (context.HostingEnvironment.IsProduction() == false)
+    {
+        config.WriteTo.Console();
+    }
+});
+
 var app = builder.Build();
 
 

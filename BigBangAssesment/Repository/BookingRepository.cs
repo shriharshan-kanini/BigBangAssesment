@@ -20,8 +20,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -33,8 +32,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -56,8 +54,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -78,8 +75,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -97,8 +93,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null; 
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
     }

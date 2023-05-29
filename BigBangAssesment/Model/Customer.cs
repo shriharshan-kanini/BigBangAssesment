@@ -6,7 +6,7 @@ namespace BigBangAssesment.Model
     {
         [Key]
         public int CustomerId { get; set; }
-        public string? CustomerName { get; set; } = string.Empty;
+        public string? CustomerName { get; set; }
         public int? CustomerNumber { get; set;}
         public ICollection<Booking>? Bookings { get; set; }
         public Hotel? Hotel { get; set; } 

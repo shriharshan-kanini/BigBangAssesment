@@ -2,6 +2,7 @@
 using BigBangAssesment.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Collections.Generic;
 
 namespace HotelManagement.Controllers
@@ -12,10 +13,12 @@ namespace HotelManagement.Controllers
     public class HotelController : ControllerBase
     {
         private readonly IHotel _hotelRepository;
+        private readonly ILogger<HotelController> logger;
 
-        public HotelController(IHotel hotelRepository)
+        public HotelController(IHotel hotelRepository, ILogger<HotelController> logger)
         {
             _hotelRepository = hotelRepository;
+            this.logger = logger;
         }
 
         [HttpGet]

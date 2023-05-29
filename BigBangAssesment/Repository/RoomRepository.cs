@@ -1,8 +1,6 @@
 ﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 
 namespace HotelManagement.Repositories
 {
@@ -23,8 +21,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -36,8 +33,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -53,11 +49,9 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
-
 
         public Room PutRoom(int RoomId, Room room)
         {
@@ -71,8 +65,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -90,8 +83,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
     }

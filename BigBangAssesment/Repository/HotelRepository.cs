@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BigBangAssesment.Model;
+﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,8 +21,7 @@ namespace AssessmentAPI.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null; 
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -36,8 +33,7 @@ namespace AssessmentAPI.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -51,8 +47,7 @@ namespace AssessmentAPI.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -72,8 +67,7 @@ namespace AssessmentAPI.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -91,8 +85,7 @@ namespace AssessmentAPI.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
     }

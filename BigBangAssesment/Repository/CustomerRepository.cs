@@ -1,16 +1,11 @@
 ﻿using BigBangAssesment.Model;
 using BigBangAssesment.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace HotelManagement.Repositories
 {
     public class CustomerRepository : ICustomer
     {
         private readonly HotelDbContext _context;
-
         public CustomerRepository(HotelDbContext context)
         {
             _context = context;
@@ -24,8 +19,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -37,8 +31,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -54,8 +47,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -71,8 +63,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -90,8 +81,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -105,13 +95,11 @@ namespace HotelManagement.Repositories
                 {
                     filteredHotels = filteredHotels.Where(h => h.HotelLocation.Contains(HotelLocation));
                 }
-
                 return filteredHotels.ToList();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return null;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
 
@@ -128,8 +116,7 @@ namespace HotelManagement.Repositories
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An error occurred: " + ex.Message);
-                return 0;
+                throw new Exception("An error occurred: " + ex.Message);
             }
         }
     }
